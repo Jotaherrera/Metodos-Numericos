@@ -9,7 +9,7 @@ def equation(xI):
 
 # La ecuación siempre tiene que dar 0
 if abs(equation(xI)) <= 0.001:
-    print(print(f"Felicidades, llegaste a la respuesta, es: {xI}"))
+    print(f"Felicidades, llegaste a la respuesta, es: {xI}")
 
 else:
     counter = 0
