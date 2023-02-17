@@ -1,18 +1,18 @@
 import random as rnd
 
-xI = rnd.randint(-100, 100)
+xI = rnd.randint(-10000, 10000)
 
-
+# Ecuaciones para testing:
 # (3 * xI) - 27 = 9
 # (5 * xI) - 15 = 3
 # 3 * ((2 * xI) + 1) + 9 = -2
+# Remplazar cualquier ecuación en el return de la función siguiente
 
 
 def equation(xI):
     return (3 * xI) - 27
 
 
-# La ecuación siempre tiene que dar 0
 # Este algoritmo solo resuelve ecuaciones donde la variable corresponde a un número entero
 if abs(equation(xI)) <= 0.001:
     print(f"Felicidades, llegaste a la respuesta, es: {xI}")
