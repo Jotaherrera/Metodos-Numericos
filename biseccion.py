@@ -1,26 +1,33 @@
 import random as rnd
 
-count = 0
-
+# Ecuaciones de prueba, remplazar en el return de la función siguiente
 # (3 * xI) - 27 = 9
 # (5 * xI) - 15 = 3
 # 3 * ((2 * xI) + 1) + 9 = -2
 
 
+# Función ecuación.
 def eq(xI):
-    return 3 * ((2 * xI) + 1) + 9
+    return (3 * xI) - 27
 
 
+# Función de definición de pares de números aleatorios dentro de un rango especifico
 def rndNumbers():
     xLow = rnd.randint(-100, 100)
     xHigh = rnd.randint(xLow, 100)
 
+    print(f"* El rango de búsqueda es de {xLow} a {xHigh} ")
     return xLow, xHigh
 
 
+count = 0
+
+
+# Función recursiva de búsqueda bi-seccionada.
 def biseccion(xLow, xHigh):
     global count
     count = count + 1
+
     if xHigh >= xLow:
         xMiddle = (xHigh + xLow) // 2
 
@@ -34,15 +41,19 @@ def biseccion(xLow, xHigh):
         else:
             return biseccion(xMiddle + 1, xHigh)
     else:
+        # Cuando el número menor sobrepasa el mayor el resultado
+        # no se encuentra dentro de ese rango,por lo que se genera uno nuevo.
         isInList = 0
-        print(f"El elemento no estaba presente en el rango, generando uno nuevo... ")
+        print(f"X El elemento no estaba presente en el rango, generando uno nuevo... ")
         return 0, count, 0
 
 
 isInList = 0
 
+# Ciclo de ejecución de ambas funciones hasta que la función principal
+# devuelva el resultado correcto.
 while isInList == 0:
     xLow, xHigh = rndNumbers()
     x, count, isInList = biseccion(xLow, xHigh)
 
-print(f"La X de la ecuación corresponde a {x} y el número de iteraciones fue {count}")
+print(f"» La X de la ecuación corresponde a {x} y el número de iteraciones fue {count}")
