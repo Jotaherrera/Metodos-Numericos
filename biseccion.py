@@ -1,7 +1,4 @@
 import random as rnd
-import sys as sys
-
-sys.setrecursionlimit(10**6)
 
 # Ecuaciones de prueba, remplazar en el return de la función siguiente
 # (3 * xI) - 27 = 9
@@ -12,7 +9,7 @@ sys.setrecursionlimit(10**6)
 
 # Función ecuación.
 def eq(xI):
-    return (2 * xI) - 11
+    return (3 * xI) - 27
 
 
 # Función de definición de pares de números aleatorios dentro de un rango especifico
