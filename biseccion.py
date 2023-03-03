@@ -1,11 +1,5 @@
 import random as rnd
 
-# Ecuaciones de prueba, remplazar en el return de la función siguiente
-# (3 * xI) - 27 = 9
-# (5 * xI) - 15 = 3
-# 3 * ((2 * xI) + 1) + 9 = -2
-# (2 * xI) - 11 = 5.5
-
 
 # Función ecuación.
 def eq(xI):
