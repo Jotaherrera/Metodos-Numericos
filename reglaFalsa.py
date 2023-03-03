@@ -5,22 +5,23 @@ import random as rnd
 # (5 * xI) - 15 = 3
 # 3 * ((2 * xI) + 1) + 9 = -2
 # (2 * xI) - 11 = 5.5
+# (5 * xI) - 11
 
 
 # Función ecuación.
 def eq(xI):
-    return (5 * xI) - 15
+    return (5 * xI) - 11
 
 
 # Función de definición de pares de números aleatorios dentro de un rango especifico
 def rndNumbers():
-    xLow = rnd.randint(-1000, 1000)
+    xLow = rnd.uniform(-1000, 1000)
     while eq(xLow) > 0:
-        xLow = rnd.randint(-1000, 1000)
+        xLow = rnd.uniform(-1000, 1000)
 
-    xHigh = rnd.randint(xLow, 1000)
+    xHigh = rnd.uniform(xLow, 1000)
     while eq(xHigh) < 0:
-        xHigh = rnd.randint(xLow, 1000)
+        xHigh = rnd.uniform(xLow, 1000)
 
     print(f"* El rango de búsqueda es de {xLow} a {xHigh} ")
     return xLow, xHigh
