@@ -1,9 +1,12 @@
 import random as rnd
+import sys
+
+sys.setrecursionlimit(10**6)
 
 
 # Función ecuación.
 def eq(xI):
-    return (5 * xI) - 11
+    return (2 * xI**2) - 11
 
 
 # Función de definición de pares de números aleatorios dentro de un rango especifico
