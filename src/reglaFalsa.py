@@ -1,45 +1,38 @@
 import random as rnd
-import sys
-
-sys.setrecursionlimit(10**6)
 
 
 # Función ecuación.
 def eq(xI):
-    return (2 * xI**2) - 11
+    return (2 * xI**3) - 11
 
 
 # Función de definición de pares de números aleatorios dentro de un rango especifico
 def rndNumbers():
-    xLow = rnd.uniform(-1000, 1000)
+    xLow = rnd.randint(-1000, 1000)
     while eq(xLow) > 0:
-        xLow = rnd.uniform(-1000, 1000)
+        xLow = rnd.randint(-1000, 1000)
 
-    xHigh = rnd.uniform(xLow, 1000)
+    xHigh = rnd.randint(xLow, 1000)
     while eq(xHigh) < 0:
-        xHigh = rnd.uniform(xLow, 1000)
+        xHigh = rnd.randint(xLow, 1000)
 
     print(f"* El rango de búsqueda es de {xLow} a {xHigh} ")
     return xLow, xHigh
 
 
-# Función recursiva de búsqueda bi-seccionada.
-def biseccion(xLow, xHigh, count=0):
-    count = count + 1
-
+counter = 0
+xLow, xHigh = rndNumbers()
+while True:
+    counter += 1
     xMiddle = xLow - (eq(xLow) * (xHigh - xLow) / (eq(xHigh) - eq(xLow)))
 
-    if abs(eq(xMiddle)) <= 0.001:
-        return xMiddle, count
-    elif eq(xMiddle) > 0.001:
-        return biseccion(xLow, xMiddle - 0.1, count)
+    if eq(xMiddle) > 0:
+        xHigh = xMiddle
     else:
-        return biseccion(xMiddle + 0.1, xHigh, count)
+        xLow = xMiddle
 
-
-xLow, xHigh = rndNumbers()
-x, count = biseccion(xLow, xHigh)
-
-print(
-    f"» La X de la ecuación corresponde a {round(x, 2)} y el número de iteraciones fue {count}"
-)
+    if abs(eq(xMiddle)) <= 0.001:
+        print(
+            f"La respuesta es {round(xMiddle, 2)} y el numero de iteraciones fue {counter}"
+        )
+        break
