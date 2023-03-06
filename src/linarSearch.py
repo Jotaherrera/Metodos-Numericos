@@ -3,28 +3,33 @@ import random as rnd
 xI = rnd.randint(-1000, 1000)
 
 
-def equation(xI):
-    return (3 * xI) - 27
+def eq(xI):
+    return (2 * xI**3) - 11
 
 
-# Este algoritmo solo resuelve ecuaciones donde la variable corresponde a un número entero
-if abs(equation(xI)) <= 0.001:
-    print(f"Felicidades, llegaste a la respuesta, es: {xI}")
+if eq(xI) == 0:
+    print(
+        f"» La X de la ecuación corresponde a {round(xI, 2)} y el número de iteraciones fue 1"
+    )
 
 else:
-    counter = 0
+    count = 0
     while True:
-        counter = counter + 1
-
-        if equation(xI) > 0:
-            x1 = xI - 0.1
+        if eq(xI) > 0:
+            count += 1
+            x1 = xI - 0.001
             xI = x1
+            if eq(xI) <= 0.001:
+                print(
+                    f"» La X de la ecuación corresponde a {round(xI, 2)} y el número de iteraciones fue {count}"
+                )
+                break
         else:
-            x2 = xI + 0.1
-            xI = x2
-
-        if abs(equation(xI)) <= 0.001:
-            print(
-                f"Felicidades, llegaste a la respuesta, es: {round(xI,2)} y el número de iteraciones fue: {counter}"
-            )
-            break
+            count += 1
+            x1 = xI + 0.001
+            xI = x1
+            if eq(xI) >= 0.001:
+                print(
+                    f"» La X de la ecuación corresponde a {round(xI, 2)} y el número de iteraciones fue {count}"
+                )
+                break
