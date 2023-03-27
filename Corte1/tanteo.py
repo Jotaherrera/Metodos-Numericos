@@ -4,7 +4,7 @@ xI = rnd.randint(-1000, 1000)
 
 
 def eq(xI):
-    return 2 * xI**2 - 5 * xI + 2
+    return xI**2 + (xI + 2) ** 2 - 580
 
 
 def tanteo():
@@ -16,11 +16,11 @@ def tanteo():
         while True:
             if eq(xI) > 0:
                 count += 1
-                x1 = xI - 0.001
+                x1 = xI - 0.00001
                 xI = x1
             elif eq(xI) < 0:
                 count += 1
-                x1 = xI + 0.001
+                x1 = xI + 0.00001
                 xI = x1
             if abs(eq(xI)) <= 0.001:
                 print(
@@ -31,11 +31,11 @@ def tanteo():
         while True:
             if eq(xI) > 0:
                 count += 1
-                x1 = xI + 0.001
+                x1 = xI + 0.00001
                 xI = x1
             elif eq(xI) < 0:
                 count += 1
-                x1 = xI - 0.001
+                x1 = xI - 0.00001
                 xI = x1
             if abs(eq(xI)) <= 0.001:
                 print(
