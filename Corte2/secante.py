@@ -6,35 +6,38 @@ def f(xI):
 
 
 def rndNumbers():
-    xLow = rnd.randint(-10, 10)
+    xLow = rnd.randint(-1000, 1000)
     while f(xLow) > 0:
-        xLow = rnd.randint(-10, 10)
+        xLow = rnd.randint(-1000, 1000)
 
-    xHigh = rnd.randint(xLow, 10)
+    xHigh = rnd.randint(xLow, 1000)
     while f(xHigh) < 0:
-        xHigh = rnd.randint(xLow, 10)
+        xHigh = rnd.randint(xLow, 1000)
 
     print(f"* El rango de búsqueda es de {xLow} a {xHigh} ")
     return xLow, xHigh
 
 
-def pFP(xLow, xHigh):
-    return (f(xLow) - f(xHigh)) / (xLow - xHigh)
+def main():
+    count = 0
+
+    xLow, xHigh = rndNumbers()
+
+    while True:
+        count += 1
+
+        xC = xLow - ((f(xLow) * (xLow - xHigh)) / ((f(xLow) - f(xHigh))))
+
+        if abs(f(xC)) <= 0.0001:
+            print(f"X = {xC}  Count = {count}")
+            break
+        elif f(xLow) * f(xC) < 0:
+            xHigh = xC
+            xC = xLow - ((f(xLow) * (xLow - xHigh)) / (f(xLow) - f(xHigh)))
+        else:
+            xLow = xC
+            xC = xLow - ((f(xLow) * (xLow - xHigh)) / (f(xLow) - f(xHigh)))
 
 
-count = 0
-
-xLow, xHigh = rndNumbers()
-
-while True:
-    count += 1
-
-    x = pFP(xLow, xHigh)
-
-    xC = xLow - (f(xLow) / pFP(x, xHigh))
-
-    if f(xC) == 0:
-        print(f"Ok {xC}")
-        break
-    else:
-        xLow = xC
+if __name__ == "__main__":
+    main()
