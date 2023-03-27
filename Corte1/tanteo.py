@@ -4,32 +4,44 @@ xI = rnd.randint(-1000, 1000)
 
 
 def eq(xI):
-    return (2 * xI**3) - 11
+    return 2 * xI**2 - 5 * xI + 2
 
 
-if eq(xI) == 0:
-    print(
-        f"» La X de la ecuación corresponde a {round(xI, 2)} y el número de iteraciones fue 1"
-    )
+def tanteo():
+    xI = rnd.randint(-100, 100)
 
-else:
     count = 0
-    while True:
-        if eq(xI) > 0:
-            count += 1
-            x1 = xI - 0.001
-            xI = x1
-            if eq(xI) <= 0.001:
+
+    if xI >= 0:
+        while True:
+            if eq(xI) > 0:
+                count += 1
+                x1 = xI - 0.001
+                xI = x1
+            elif eq(xI) < 0:
+                count += 1
+                x1 = xI + 0.001
+                xI = x1
+            if abs(eq(xI)) <= 0.001:
                 print(
                     f"» La X de la ecuación corresponde a {round(xI, 2)} y el número de iteraciones fue {count}"
                 )
                 break
-        else:
-            count += 1
-            x1 = xI + 0.001
-            xI = x1
-            if eq(xI) >= 0.001:
+    else:  # if xI is negative
+        while True:
+            if eq(xI) > 0:
+                count += 1
+                x1 = xI + 0.001
+                xI = x1
+            elif eq(xI) < 0:
+                count += 1
+                x1 = xI - 0.001
+                xI = x1
+            if abs(eq(xI)) <= 0.001:
                 print(
                     f"» La X de la ecuación corresponde a {round(xI, 2)} y el número de iteraciones fue {count}"
                 )
                 break
+
+
+tanteo()
