@@ -2,7 +2,7 @@ import random as rnd
 
 
 def f(xI):
-    return 2 * xI**3 - 8 * xI**2 + 5 * xI - 2
+    return xI**3 + 3 * xI**2 + 3 * xI + 1
 
 
 def rndNumbers():
@@ -10,9 +10,9 @@ def rndNumbers():
     while f(xLow) > 0:
         xLow = rnd.randint(-1000, 1000)
 
-    xHigh = rnd.randint(xLow, 1000)
+    xHigh = rnd.randint(-1000, 1000)
     while f(xHigh) < 0:
-        xHigh = rnd.randint(xLow, 1000)
+        xHigh = rnd.randint(-1000, 1000)
 
     print(f"* El rango de búsqueda es de {xLow} a {xHigh} ")
     return xLow, xHigh
@@ -29,7 +29,7 @@ def main():
         xC = xLow - ((f(xLow) * (xLow - xHigh)) / ((f(xLow) - f(xHigh))))
 
         if abs(f(xC)) <= 0.0001:
-            print(f"X = {xC}  Count = {count}")
+            print(f"X = {round(xC, 2)}  Count = {count}")
             break
         elif f(xLow) * f(xC) < 0:
             xHigh = xC

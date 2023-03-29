@@ -3,7 +3,7 @@ import random as rnd
 
 # Función ecuación.
 def eq(xI):
-    return (2 * xI**3) - 11
+    return xI**3 + 3 * xI**2 + 3 * xI + 1
 
 
 # Función de definición de pares de números aleatorios dentro de un rango especifico
@@ -12,9 +12,9 @@ def rndNumbers():
     while eq(xLow) > 0:
         xLow = rnd.randint(-1000, 1000)
 
-    xHigh = rnd.randint(xLow, 1000)
+    xHigh = rnd.randint(-1000, 1000)
     while eq(xHigh) < 0:
-        xHigh = rnd.randint(xLow, 1000)
+        xHigh = rnd.randint(-1000, 1000)
 
     print(f"* El rango de búsqueda es de {xLow} a {xHigh} ")
     return xLow, xHigh
