@@ -3,7 +3,7 @@ import re
 
 
 def getEq():
-    eQ = "xI**3 - 5*xI**2 + 8*xI - 4 "
+    eQ = "xI**2 - 5*xI + 6"
 
     match = re.search(r"\*\*?\s*(\d+)", str(eQ))
 
@@ -54,11 +54,7 @@ def main():
             deno = eval(eqX0PlusEqX0) - eval(eqX0)
 
             if deno == 0:
-                if round(x0, 2) in roots:
-                    break
-
                 print(f"X = {x0}  Count = {count}")
-
                 roots.append(round(x0, 2))
                 break
             else:
@@ -66,7 +62,7 @@ def main():
 
                 eqX1 = eQ.replace("xI", str(x1))
 
-                if abs(eval(eqX1)) <= 0.0001:
+                if abs(eval(eqX1)) <= 0.0000001:
                     if round(x1, 2) in roots:
                         break
                     print(f"X = {round(x1, 2)}  Count = {count}")
