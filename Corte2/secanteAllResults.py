@@ -3,7 +3,7 @@ import re
 
 
 def f():
-    eQ = "xI**4 - 6*xI**3 + 11*xI**2 - 6*xI"
+    eQ = "xI**3 - xI"
     match = re.search(r"\*\*?\s*(\d+)", str(eQ))
 
     if match:
@@ -23,14 +23,14 @@ def rndNumbers():
     xLow = rnd.randint(-10, 10)
     equationLow = eQ.replace("xI", str(xLow))
     while eval(equationLow) > 0:
-        xLow = rnd.randint(-100, 100)
+        xLow = rnd.randint(-10, 10)
         equationLow = eQ.replace("xI", str(xLow))
 
-    xHigh = rnd.randint(xLow, 100)
+    xHigh = rnd.randint(xLow, 10)
 
     equationHigh = eQ.replace("xI", str(xHigh))
     while eval(equationHigh) < 0:
-        xHigh = rnd.randint(xLow, 100)
+        xHigh = rnd.randint(xLow, 10)
         equationHigh = eQ.replace("xI", str(xHigh))
     return xLow, xHigh
 
@@ -51,45 +51,45 @@ def main():
         if abs(xC) >= abs(xHigh):
             break
 
-        try:
-            while True:
-                count += 1
+            # try:
+        while True:
+            count += 1
 
-                equationLow = eQ.replace("xI", str(xLow))
-                equationHigh = eQ.replace("xI", str(xHigh))
+            equationLow = eQ.replace("xI", str(xLow))
+            equationHigh = eQ.replace("xI", str(xHigh))
 
-                if (eval(equationLow) - eval(equationHigh)) == 0:
-                    break
+            if (eval(equationLow) - eval(equationHigh)) == 0:
+                break
 
+            xC = xLow - (
+                (eval(equationLow) * (xLow - xHigh))
+                / ((eval(equationLow) - eval(equationHigh)))
+            )
+
+            eqVar = eQ.replace("xI", str(xC))
+
+            if abs(eval(eqVar)) <= 0.0001 and xC not in roots:
+                print(f"X = {round(xC, 2)}  Count = {count}")
+
+                roots.append(round(xC, 2))
+                break
+            elif eval(equationLow) * eval(eqVar) < 0:
+                xHigh = xC
                 xC = xLow - (
                     (eval(equationLow) * (xLow - xHigh))
-                    / ((eval(equationLow) - eval(equationHigh)))
+                    / (eval(equationLow) - eval(equationHigh))
+                )
+            else:
+                xLow = xC
+                xC = xLow - (
+                    (eval(equationLow) * (xLow - xHigh))
+                    / (eval(equationLow) - eval(equationHigh))
                 )
 
-                eqVar = eQ.replace("xI", str(xC))
-
-                if abs(eval(eqVar)) <= 0.0001 and xC not in roots:
-                    print(f"X = {round(xC, 2)}  Count = {count}")
-
-                    roots.append(round(xC, 2))
-                    break
-                elif eval(equationLow) * eval(eqVar) < 0:
-                    xHigh = xC
-                    xC = xLow - (
-                        (eval(equationLow) * (xLow - xHigh))
-                        / (eval(equationLow) - eval(equationHigh))
-                    )
-                else:
-                    xLow = xC
-                    xC = xLow - (
-                        (eval(equationLow) * (xLow - xHigh))
-                        / (eval(equationLow) - eval(equationHigh))
-                    )
-
-                if count > maxIterations:
-                    break
-        except ZeroDivisionError:
-            break
+            if count > maxIterations:
+                break
+        # except ZeroDivisionError:
+        #     break
     print(sorted(roots))
 
 
