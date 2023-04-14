@@ -3,7 +3,7 @@ import re
 
 
 def getEq():
-    eQ = "xI**2 - 5*xI + 6"
+    eQ = "2*xI**2 - 5*xI + 2"
 
     match = re.search(r"\*\*?\s*(\d+)", str(eQ))
 
@@ -19,9 +19,9 @@ def getEq():
 
 
 def getSeed(roots):
-    x0 = rnd.randint(-10, 10)
+    x0 = rnd.uniform(-10, 10)
     while x0 in roots:
-        x0 = rnd.randint(-10, 10)
+        x0 = rnd.uniform(-10, 10)
     return x0
 
 
