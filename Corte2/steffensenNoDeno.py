@@ -3,7 +3,7 @@ import re
 
 
 def getEq():
-    eQ = "xI**2"
+    eQ = "3*xI**2 - 2*xI - 1 "
 
     match = re.search(r"\*\*?\s*(\d+)", str(eQ))
 
@@ -19,29 +19,33 @@ def getEq():
 
 
 def getSeed(roots):
-    x0 = rnd.randint(-10, 10)
-    while x0 in roots:
-        x0 = rnd.randint(-10, 10)
-    return x0
+    while True:
+        x0 = rnd.uniform(-10, 10)
+        if x0 not in roots:
+            return x0
 
 
-def clean_array(arr, threshold):
-    unique_arr = [arr[0]]
-    for i in range(1, len(arr)):
-        if abs(arr[i] - unique_arr[-1]) > threshold:
-            unique_arr.append(arr[i])
-    return unique_arr
+def cleanArray(arr, margin):
+    return sorted(
+        [arr[0]]
+        + [arr[i] for i in range(1, len(arr)) if abs(arr[i] - arr[i - 1]) > margin]
+    )
+
+
+def verifyRoots(roots, num, count):
+    if round(num, 2) not in roots:
+        print(f"X = {num}  Count = {count}")
+        roots.append(round(num, 2))
 
 
 def main():
     roots = []
     eQ, degree = getEq()
-
     bigCount = 0
+
     while len(roots) < degree:
         bigCount += 1
         count = 0
-
         x0 = getSeed(roots)
 
         while True:
@@ -49,9 +53,8 @@ def main():
 
             eqX0 = eQ.replace("xI", str(x0))
 
-            if abs(eval(eqX0)) <= 0.0001:
-                print(f"X = {x0}  Count = {count}")
-                roots.append(round(x0, 2))
+            if abs(eval(eqX0)) <= 0.00001:
+                verifyRoots(roots, x0, count)
                 break
             else:
                 eqX0PlusEqX0 = eQ.replace("xI", str(x0 + eval(eqX0)))
@@ -60,11 +63,8 @@ def main():
 
                 eqX1 = eQ.replace("xI", str(x1))
 
-                if abs(eval(eqX1)) <= 0.0000001:
-                    if round(x1, 2) in roots:
-                        break
-                    print(f"X = {round(x1, 2)}  Count = {count}")
-                    roots.append(round(x1, 2))
+                if abs(eval(eqX1)) <= 0.00001:
+                    verifyRoots(roots, x1, count)
                     break
                 else:
                     x0 = x1
@@ -74,8 +74,8 @@ def main():
         if bigCount > 100:
             break
 
-    roots = clean_array(roots, 0.1)
-    print(sorted(set(roots)))
+    roots = cleanArray(roots, 0.1)
+    print(roots)
 
 
 if __name__ == "__main__":
