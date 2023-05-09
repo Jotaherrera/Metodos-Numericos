@@ -57,7 +57,7 @@ def main():
 
     while True:
         counter += 1
-        rndValues = [rnd.randint(-20, 20) for _ in range(len(vars))]
+        rndValues = [rnd.randint(-10, 10) for _ in range(len(vars))]
         allCorrect = all(
             evaluateFunction(f, vars, rndValues) == t for f, t in zip(equations, terms)
         )
