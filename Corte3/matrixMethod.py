@@ -31,7 +31,7 @@ plt.legend()
 
 # --------------------- AX1 ---------------------------
 ax1 = fig.add_subplot(1, 2, 2, projection="3d")
-ax1.plot(X1, X2, Y_predict, "orange", label="Matriz Model")
+ax1.plot(X1, X2, Y_predict, "orange", label="Matrix Model")
 ax1.set_xlim(X1.min(), X1.max())
 ax1.set_ylim(X2.min(), X2.max())
 ax1.set_zlim(Y_real.min(), Y_real.max())
